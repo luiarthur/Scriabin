@@ -3,11 +3,9 @@ class TestSuite extends FunSuite {
   test("Test TestSuite") {
     val sampletxt = scala.io.Source.fromFile("src/test/resources/sample.txt").mkString
 
-    import com.sksamuel.scrimage.Image
-    val image1 = Image(getClass.getResourceAsStream("src/test/resources/img/sample.jpg"))
-    Image(getClass.getResourceAsStream("/src/test/resouces/img/sample.jpg"))
+    //import com.sksamuel.scrimage.Image
+    //val image1 = Image(getClass.getResourceAsStream("src/test/resources/img/sample.jpg"))
 
-    /*
     import java.io.File
     import javax.imageio.ImageIO // to read img 
     import java.awt.image.BufferedImage // to store img
@@ -21,6 +19,5 @@ class TestSuite extends FunSuite {
       img.setRGB(j,i,newc.getRGB)
     }
     ImageIO.write(img, "jpg", new File("src/test/resources/img/grayscale.jpg"));
-    */
   }
 }
