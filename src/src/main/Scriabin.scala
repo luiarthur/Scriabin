@@ -1,4 +1,0 @@
-package scriabin
-
-object Scriabin {
-}

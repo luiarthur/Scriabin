@@ -1,3 +1,0 @@
-This is a standard text. Make sure you write this before starting your app.
-
-- Require users to write this 5-10 times to have the software learn writing styles. Also have them write on wal-mart lined paper.
