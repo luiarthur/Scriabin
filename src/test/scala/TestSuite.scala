@@ -14,7 +14,9 @@ class TestSuite extends FunSuite {
     val img = ImageIO.read(new File("src/test/resources/img/sample.jpg"))
     for (i <- 0 until img.getHeight; j <- 0 until img.getWidth) {
       val c = new Color(img.getRGB(j,i))
-      val x = { if ( c.getRed+ c.getGreen + c.getBlue > 70*3.0) 255 else 0 }
+      //val x = { if ( c.getRed+ c.getGreen + c.getBlue > 70*3.0) 255 else 0 }
+      //val x = (c.getRed*.299 + c.getGreen*.587 + c.getBlue*.114).toInt
+      val x = if (c.getRed < 70 && c.getGreen < 70) 0 else 255
       val newc = new Color(x,x,x)
       img.setRGB(j,i,newc.getRGB)
     }
