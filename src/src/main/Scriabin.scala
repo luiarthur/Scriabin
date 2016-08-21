@@ -1,0 +1,4 @@
+package scriabin
+
+object Scriabin {
+}
