@@ -2,7 +2,7 @@ name := "scriabin"
 
 version := "v0.1"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.10.6"
 
 libraryDependencies ++= Seq(
   // scalatest:

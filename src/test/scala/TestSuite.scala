@@ -3,9 +3,26 @@ class TestSuite extends FunSuite {
   test("Test TestSuite") {
     val sampletxt = scala.io.Source.fromFile("src/test/resources/sample.txt").mkString
 
-    //import com.sksamuel.scrimage.Image
-    //val image1 = Image(getClass.getResourceAsStream("src/test/resources/img/sample.jpg"))
+    /* Scrimage is broken...
+    import com.sksamuel.scrimage.Image
+    val ins = "src/test/resources/img/sample.jpg"
+    val ins = "/img/sample.jpg"
+    val in = getClass.getResourceAsStream(ins)
+    val img = Image.fromStream(in)
+    val img = Image.fromResource(ins)
+    */
 
+    import CannyEdgeDetector._
+    val detector = new CannyEdgeDetector()
+    detector.setLowThreshold(.5f)
+    detector.setHighThreshold(1f)
+    val img = ImageIO.read(new File("src/test/resources/img/sample.jpg"))
+    detector.setSourceImage(img)
+    detector.process()
+    val edges = detector.getEdgesImage();
+    ImageIO.write(edges, "jpg", new File("src/test/resources/img/edge.jpg"))
+
+    
     import java.io.File
     import javax.imageio.ImageIO // to read img 
     import java.awt.image.BufferedImage // to store img
