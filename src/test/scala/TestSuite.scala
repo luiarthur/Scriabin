@@ -3,13 +3,16 @@ class TestSuite extends FunSuite {
   test("Test TestSuite") {
     val sampletxt = scala.io.Source.fromFile("src/test/resources/sample.txt").mkString
 
-    /* Scrimage is broken...
-    import com.sksamuel.scrimage.Image
+    /* Scrimage is working...
+    import com.sksamuel.scrimage._
     val ins = "src/test/resources/img/sample.jpg"
-    val ins = "/img/sample.jpg"
-    val in = getClass.getResourceAsStream(ins)
-    val img = Image.fromStream(in)
-    val img = Image.fromResource(ins)
+    val outs = "src/test/resources/img/grey.png"
+    val in = new java.io.File(ins)
+    val img = Image.fromFile(in)
+
+
+    // pyramiding
+    img.scale(0.1).output(new java.io.File(outs))
     */
 
     import CannyEdgeDetector._
