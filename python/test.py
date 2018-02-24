@@ -1,9 +1,13 @@
+import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+from sklearn import cluster
 
 from skimage.filters import threshold_otsu, threshold_adaptive
 from skimage import data
 import skimage
+
+import scipy
 #from skimage.filters import try_all_threshold
 
 image = skimage.io.imread("../src/test/resources/img/sample.jpg")
@@ -38,4 +42,59 @@ ax[2].set_title('Adaptive thresholding')
 for a in ax:
     a.axis('off')
 
+plt.show()
+
+### Some Edge Detector ###
+Faler=np.array([ [[-1,0,1],[-1,0,1],[-1,0,1]], 
+                 [[1,1,1],[0,0,0],[-1,-1,-1]],
+                 [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]],
+                 [[0,1,0],[-1,0,1],[0,-1,0]] ])
+
+### Vertical Edge Detection ###
+vert_mask = np.array([[-1,0,1],
+                      [-1,0,1],
+                      [-1,0,1]])
+### Horizontal Edge Detection ###
+hor_mask = vert_mask.T
+v = scipy.signal.convolve2d(image, vert_mask, boundary='symm', mode='same')
+b = scipy.signal.convolve2d(m, hor_mask)
+plt.imshow(b)
+plt.show()
+
+plt.imshow(v)
+plt.show()
+
+plt.imshow(image)
+plt.show()
+
+
+### Arthur ###
+face = skimage.io.imread("img/fb_profile.jpg")
+
+face_grey = rgb2gray(face)
+plt.imshow(face_grey)
+#plt.imshow(face)
+plt.show()
+
+### Some Edge Face ###
+face_f = scipy.signal.convolve2d(face_grey, Faler[3,:,:])
+plt.imshow(face_f)
+plt.show()
+
+### Vertical Edge Face ###
+face_v = scipy.signal.convolve2d(face_grey, vert_mask)
+plt.imshow(face_v)
+plt.show()
+
+### Horizontal Edge Face ###
+face_h = scipy.signal.convolve2d(face_grey, hor_mask)
+plt.imshow(face_h)
+plt.show()
+
+### Kmeans ###
+face_mat = np.reshape(face, (np.prod(face.shape[:2]), face.shape[-1]))
+km = cluster.KMeans(n_clusters=4).fit(face_mat)
+face_clus = np.uint8(np.reshape(km.cluster_centers_[km.labels_,:], face.shape))
+
+plt.imshow(face_clus)
 plt.show()
