@@ -56,6 +56,9 @@ vert_mask = np.array([[-1,0,1],
                       [-1,0,1]])
 ### Horizontal Edge Detection ###
 hor_mask = vert_mask.T
+### mode:
+# same -> pad image so that output-size the same as original-size
+# valid -> no padding used
 v = scipy.signal.convolve2d(image, vert_mask, boundary='symm', mode='same')
 b = scipy.signal.convolve2d(image, hor_mask)
 plt.imshow(b)
