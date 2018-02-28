@@ -105,6 +105,12 @@ face_pool = skimage.measure.block_reduce(face_h, (10,10), np.max)
 plt.imshow(face_pool)
 plt.show()
 
+### Pool, then edge ###
+face_ph = skimage.measure.block_reduce(face_grey, (10,10), np.max)
+face_ph = scipy.signal.convolve2d(face_ph, hor_mask)
+plt.imshow(face_ph)
+plt.show()
+
 ### Kmeans ###
 face_mat = np.reshape(face, (np.prod(face.shape[:2]), face.shape[-1]))
 km = cluster.KMeans(n_clusters=4).fit(face_mat)
