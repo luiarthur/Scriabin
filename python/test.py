@@ -6,6 +6,7 @@ from sklearn import cluster
 from skimage.filters import threshold_otsu, threshold_adaptive
 from skimage import data
 import skimage
+import skimage.measure # pooling
 
 import scipy
 #from skimage.filters import try_all_threshold
@@ -15,7 +16,7 @@ image = skimage.io.imread("../src/test/resources/img/sample.jpg")
 
 def rgb2gray(rgb):
     r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
-    gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
+    gray = 0.3 * r + 0.59 * g + 0.11 * b
     return gray
 
 image = rgb2gray(image)
@@ -71,6 +72,11 @@ plt.imshow(image)
 plt.show()
 
 
+pooled= skimage.measure.block_reduce(v, (5,5), np.max)
+plt.imshow(-pooled)
+plt.show()
+
+
 ### Arthur ###
 face = skimage.io.imread("img/fb_profile.jpg")
 
@@ -92,6 +98,11 @@ plt.show()
 ### Horizontal Edge Face ###
 face_h = scipy.signal.convolve2d(face_grey, hor_mask)
 plt.imshow(face_h)
+plt.show()
+
+### Pool ###
+face_pool = skimage.measure.block_reduce(face_h, (10,10), np.max)
+plt.imshow(face_pool)
 plt.show()
 
 ### Kmeans ###
